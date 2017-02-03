@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 """
 This script takes the following iput:
 1. No. of files to be processed
@@ -10,8 +12,8 @@ import boto3
 import sys
 
 
-N = sys.argv[1]
-bucket_name = sys.argv[2]
+N = str(sys.argv)[1]
+bucket_name = str(sys.argv)[2]
 
 def recent_N(N, bucket_name):
 
