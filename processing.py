@@ -30,7 +30,10 @@ def recent_N(N, bucket_name):
 
 def get_details(N, bucket_path):
 
-	s3 = boto3.resource('s3')
+	aws_access_key_id='AKIAJHNHLWIERAWXARWQ'
+    aws_secret_access_key='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'
+
+	s3 = boto3.resource('s3', aws_access_key_id, aws_secret_access_key)
 	files = recent_N(str(N), bucket_path)
 	bucket = s3.Bucket(bucket_path)
 
