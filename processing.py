@@ -12,8 +12,8 @@ import boto3
 import sys
 
 
-N = str(sys.argv)[1]
-bucket_name = str(sys.argv)[2]
+N = str(sys.argv[1])
+bucket_name = str(sys.argv[2])
 
 def recent_N(N, bucket_name):
 
