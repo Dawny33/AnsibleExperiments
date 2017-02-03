@@ -7,16 +7,19 @@ This script takes the following iput:
 """
 import os
 import boto3
+import sys
+
+
+N = sys.argv[1]
+bucket_name = sys.argv[2]
 
 def recent_N(N, bucket_name):
 
 	#"s3cmd get $(s3cmd ls s3://episourceexperiment2/ | tail -5 | awk '{ print $4 }')"
-
 	nrecent = 's3cmd ls ' + 's3://' + bucket_name + '/ | head -' + N +  "| awk '{ print $4 }'" + "| sed 's/s3:\/\/" + bucket_name +"\///'"
 
 	output = os.popen(nrecent).read().split()
 
-	print output
 	return output
 
 
@@ -40,7 +43,7 @@ def get_details(N, bucket_path):
 
 
 
-print get_details(3, "episourcedemo")
+print get_details(N, str(bucket_name))
 
 
 
