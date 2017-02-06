@@ -39,7 +39,7 @@ def get_details(N, bucket_path):
 		print key
 		if key in files:
 			body = obj.get()['Body'].read()
-			s3.Bucket('episourceexperiment2resized').put_object(Key=key, Body=body)
+			s3.Bucket('outfileepi').put_object(Key=key, Body=body)
 
 
 
