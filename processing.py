@@ -36,10 +36,12 @@ def get_details(N, bucket_path):
 
 	for obj in bucket.objects.all():
 		key = obj.key
-		print key
 		if key in files:
+			print key
 			body = obj.get()['Body'].read()
-			s3.Bucket('outfileepi').put_object(Key=key, Body=body)
+			print body
+			s3.Bucket('ansibletest1').put_object(Key=key, Body=body)
+			           
 
 
 
