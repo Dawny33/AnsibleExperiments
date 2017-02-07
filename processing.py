@@ -18,7 +18,10 @@ bucket_name = str(sys.argv[2])
 def recent_N(N, bucket_name):
 
 	#"s3cmd get $(s3cmd ls s3://episourceexperiment2/ | tail -5 | awk '{ print $4 }')"
-	nrecent = 's3cmd ls ' + 's3://' + bucket_name + '/ | head -' + N +  "| awk '{ print $4 }'" + "| sed 's/s3:\/\/" + bucket_name +"\///'"
+	#nrecent = 's3cmd ls ' + 's3://' + bucket_name + '/ | head -' + N +  "| awk '{ print $4 }'" + "| sed 's/s3:\/\/" + bucket_name +"\///'"
+	nrecent = 'aws s3 ls s3://' + bucket_name + '/ | sort | tail -n' + N + "| awk '{ print $4 }'"
+
+     aws s3 ls $bucket_name | sort | tail -n N | awk '{print $4}'
 
 	output = os.popen(nrecent).read().split()
 
@@ -37,9 +40,7 @@ def get_details(N, bucket_path):
 	for obj in bucket.objects.all():
 		key = obj.key
 		if key in files:
-			print key
-			body = obj.get()['Body'].read()
-			print body
+			body = obj.get()['Body'].read()			
 			s3.Bucket('ansibletest1').put_object(Key=key, Body=body)
 			           
 
