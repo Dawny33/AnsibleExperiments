@@ -30,7 +30,7 @@ for message in queue.receive_messages(MaxNumberOfMessages=10, WaitTimeSeconds=5)
 
     sqs_key = body_json['Records'][0]['s3']['object']['key']
 
-    decoded_key = str(base64.decodestring("OTAzXzEwLnR4dA%3D%3D%0A".replace('%3D', '=').replace('%0A', '')))
+    decoded_key = str(base64.decodestring(sqs_key.replace('%3D', '=').replace('%0A', '')))
 
     table.update_item(Key={'filename': sqs_key ,'status': 'Done',})
 
